@@ -42,6 +42,7 @@ func SetupRouter() *gin.Engine {
 
 	router.Any("/ws", websocket.HandleWebsocket)
 	router.GET("/ping", service.PingHandler)
+	router.GET("/create", service.CreateUsersHandlerWithContext)
 	router.POST("/sms", service.SMSHandler)
 	router.POST("/users", service.CreateUsersHandler)
 	router.POST("/alipay", service.AliPayHandler)

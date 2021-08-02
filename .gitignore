@@ -2,3 +2,4 @@ invoice
 dist/
 bin/deploy.sh
 tmp/
+vendor/

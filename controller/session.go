@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"go-pangu/conf"
 	"go-pangu/db"
 	"go-pangu/jwt"
@@ -8,6 +9,7 @@ import (
 	"go-pangu/util"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -141,4 +143,42 @@ func CreateUsersHandler(c *gin.Context) {
 		"status": "success",
 	}
 	Select(c, tx, ch, finish, resp)
+}
+
+func CreateUsersHandlerWithContext(c *gin.Context) {
+	password := "123456"
+	var wg sync.WaitGroup
+	tx := db.DB.Begin()
+	wg.Add(10)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	for i := 0; i < 10; i++ {
+		go func() {
+			for {
+				defer wg.Done()
+				select {
+				default:
+					bcryptedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+					if err != nil {
+						return
+					}
+					user1 := &models.User{
+						Email:             RandStringRunes(6, LetterRunes) + "te@te.com",
+						EncryptedPassword: string(bcryptedPassword),
+					}
+					err = tx.Create(user1).Error
+					if err != nil {
+						return
+					}
+				case <-ctx.Done():
+					return
+				}
+			}
+
+		}()
+	}
+	cancel()
+	wg.Wait()
+	tx.Commit()
+	c.String(http.StatusOK, "success")
 }
