@@ -1,5 +1,5 @@
 # Golang-pangu
-[中文文档](https://github.com/ruilisi/go-pangu/blob/master/READMECN.md)
+[中文文档](https://github.com/ExcitingFrog/go-pangu/blob/master/READMECN.md)
 
 Go-pangu is a Go boilerplate which follows cutting-edge solutions already adopted by the industry,  JWT(JSON Web Tokens), Postgres, Redis, Docker,  Gin, Ginkgo, Gorm. It is a solid production-ready starting point for your new backend projects.
 
@@ -64,20 +64,20 @@ Golang-pangu is based on following tools
 |file|function|
 |------|--------|
 |application.yml|config file|
-|[args](https://github.com/ruilisi/go-pangu/tree/master/args)|functions which can fetch params from request url|
-|[conf](https://github.com/ruilisi/go-pangu/tree/master/conf)|functions which can get configurations|
-|[controller](https://github.com/ruilisi/go-pangu/tree/master/controller)|handlers|
-|[db](https://github.com/ruilisi/go-pangu/tree/master/db)|database operations like migrating database|
-|[jwt](https://github.com/ruilisi/go-pangu/tree/master/jwt)|fuctions to create and check jwt|
+|[args](https://github.com/ExcitingFrog/go-pangu/tree/master/args)|functions which can fetch params from request url|
+|[conf](https://github.com/ExcitingFrog/go-pangu/tree/master/conf)|functions which can get configurations|
+|[controller](https://github.com/ExcitingFrog/go-pangu/tree/master/controller)|handlers|
+|[db](https://github.com/ExcitingFrog/go-pangu/tree/master/db)|database operations like migrating database|
+|[jwt](https://github.com/ExcitingFrog/go-pangu/tree/master/jwt)|fuctions to create and check jwt|
 |main.go|main function.Call function with "--db" parameter, "create" to create database, "migrate" to migrate tables, "dorp" to delete database|
-|[middleware](https://github.com/ruilisi/go-pangu/tree/master/middleware)|middleware|
-|[models](https://github.com/ruilisi/go-pangu/tree/master/models)|base models and basic database operations|
-|[params](https://github.com/ruilisi/go-pangu/tree/master/params)|struct used in data binding|
-|[redis](https://github.com/ruilisi/go-pangu/tree/master/redis)|redis connection and operations|
-|[router](https://github.com/ruilisi/go-pangu/tree/master/routers)|router|
-|[test](https://github.com/ruilisi/go-pangu/tree/master/test)|test|
-|[i18n](https://github.com/ruilisi/go-pangu/tree/master/i18n)|internationalization|
-|[influx](https://github.com/ruilisi/go-pangu/tree/master/influx)|influx operations include read/save point|
+|[middleware](https://github.com/ExcitingFrog/go-pangu/tree/master/middleware)|middleware|
+|[models](https://github.com/ExcitingFrog/go-pangu/tree/master/models)|base models and basic database operations|
+|[params](https://github.com/ExcitingFrog/go-pangu/tree/master/params)|struct used in data binding|
+|[redis](https://github.com/ExcitingFrog/go-pangu/tree/master/redis)|redis connection and operations|
+|[router](https://github.com/ExcitingFrog/go-pangu/tree/master/routers)|router|
+|[test](https://github.com/ExcitingFrog/go-pangu/tree/master/test)|test|
+|[i18n](https://github.com/ExcitingFrog/go-pangu/tree/master/i18n)|internationalization|
+|[influx](https://github.com/ExcitingFrog/go-pangu/tree/master/influx)|influx operations include read/save point|
 
 
 ## Start
@@ -175,47 +175,3 @@ Golang-pangu is based on following tools
     Post `http://localhost:3002/alipay_notify`
 
     receive pay details notify
-
-## other public library
-  [Rails-pangu](https://github.com/ruilisi/rails-pangu) is a Rails 6(API Only) boilerplate which follows cutting-edge solutions already adopted by the industry, notablly, Devise, JWT(JSON Web Tokens), Postgres, Redis, Docker, Rspec, RuboCop, CircleCI. It is a solid production-ready starting point for your new backend projects.
-
-## Projects using Go-pangu
-  |product|description|
-  |----|-----|
-  |[eSheep](https://esheep.io/)|Network booster which helps global users access better entertainment content from China.|
-  |[cs-server](https://excitingfrog.gitbook.io/im-api/)|agent server(Comming soon!)|
-  |soda-server|Comming soon!|
-
-## License
-Code and documentation copyright 2020 the [Golang-pangu Authors](https://github.com/ruilisi/go-pangu/graphs/contributors) and [ruilisi Network](https://ruilisi.co/) Code released under the [MIT License](https://github.com/ruilisi/go-pangu/blob/master/LICENSE).
-<table frame=void>
-<tr>
-<td >
-<img src="logo.png" width="100px;" alt="hophacker"/>
-</td>
-</tr>
-</table>
-
-## Contributors
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/hophacker"><img src="https://avatars2.githubusercontent.com/u/3121413?v=4" width="100px;" alt="hophacker"/><br /><sub><b>hophacker</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=hophacker" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=hophacker" title="Documentation">📖</a> <a href="#infra-hophacker" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
-    <td align="center"><a href="https://github.com/tony2100"><img src="https://avatars0.githubusercontent.com/u/37767017?v=4" width="100px;" alt="tony"/><br /><sub><b>Tony</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=tony2100" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=tony2100" title="Documentation">📖</a></td>
-        <td align="center"><a href="https://github.com/Ganggou"><img src="https://avatars1.githubusercontent.com/u/41427297?s=400&u=5cc6b0dfa214bc5671f849b3ee94acf597c2c6f4&v=4" width="100px;" alt="Ganggou"/><br /><sub><b>Ganggou</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=Ganggou" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=Ganggou" title="Documentation">📖</a></td>
-        <td align="center"><a href="https://github.com/ExcitingFrog"><img src="https://avatars2.githubusercontent.com/u/25655802?s=460&u=23017079e78e3c3bfa57a14bc369607b1b23c470&v=4" width="100px;" alt="Xingo"/><br /><sub><b>ExcitingFrog</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=ExcitingFrog" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=ExcitingFrog" title="Documentation">📖</a></td>
-        <td align="center"><a href="https://github.com/Leo7991"><img src="https://avatars1.githubusercontent.com/u/67139714?s=460&u=278212a0d4d8ca824219adcd932dc85d2fd5ae24&v=4" width="100px;" alt="Leo7991"/><br /><sub><b>Leo7991</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=Leo7991" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=Leo7991" title="Documentation">📖</a></td>
-        <td align="center"><a href="https://github.com/Daxigua443"><img src="https://avatars1.githubusercontent.com/u/62984061?s=460&u=375eab6d59b2087058c1a30210f8646281971ff7&v=4" width="100px;" alt="Daxigua443"/><br /><sub><b>Daxigua443</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=Daxigua443" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=Daxigua443" title="Documentation">📖</a></td>
-          <td align="center"><a href="https://github.com/Soryu23"><img src="https://avatars0.githubusercontent.com/u/67567977?s=460&u=fea632ad315bcdcfeff4de7ac5e2482b249929ac&v=4" width="100px;" alt="Soryu23"/><br /><sub><b>Soryu23</b></sub></a><br /><a href="https://github.com/ruilisi/golang-pangu/commits?author=Soryu23" title="Code">💻</a> <a href="https://github.com/ruilisi/golang-pangu/commits?author=Soryu23" title="Documentation">📖</a></td>
-
-  </tr>
-</table>
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
