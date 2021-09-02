@@ -38,7 +38,8 @@ func (p *program) Start() error {
 		syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 	case "migrate":
 		fmt.Println("migrating tables")
-		db.Migrate(args.Cmd.GIN_ENV, &models.User{})
+		db.Migrate("", &models.User{})
+		db.Migrate("test", &models.User{})
 		syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 	case "seed":
 	case "drop":

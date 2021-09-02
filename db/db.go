@@ -49,9 +49,7 @@ func Create() {
 		panic(err)
 	}
 	baseDb.Exec(fmt.Sprintf("CREATE DATABASE %s;", path[1:]))
-	if conf.GetEnv("GIN_ENV") != "production" {
-		baseDb.Exec(fmt.Sprintf("CREATE DATABASE %s;", testPath[1:]))
-	}
+	baseDb.Exec(fmt.Sprintf("CREATE DATABASE %s;", testPath[1:]))
 }
 
 //更新表结构
@@ -61,19 +59,6 @@ func Migrate(env string, models ...interface{}) {
 	DB.Table("pg_extension").Where("extname = ?", "pgcrypto").Find(&pgExtension)
 	if pgExtension.Extname != "pgcrypto" {
 		DB.Exec("CREATE EXTENSION pgcrypto")
-	}
-	if env == "test" {
-		DB.Exec(`CREATE OR REPLACE FUNCTION truncate_tables(username IN VARCHAR) RETURNS void AS $$
-DECLARE
-		statements CURSOR FOR 
-				SELECT tablename FROM pg_tables
-				WHERE tableowner = username AND schemaname = 'public';
-BEGIN 
-		FOR stmt IN statements LOOP 
-				EXECUTE 'TRUNCATE TABLE ' || quote_ident(stmt.tablename) || ' CASCADE;';  
-		END LOOP; 
-END; 
-$$ LANGUAGE plpgsql;`)
 	}
 	DB.AutoMigrate(models...)
 }
