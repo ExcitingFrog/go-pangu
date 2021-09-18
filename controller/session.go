@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"go-pangu/conf"
 	"go-pangu/db"
 	"go-pangu/jwt"
@@ -97,17 +98,7 @@ func SignInHandler(c *gin.Context) {
 //创建十个账户，如果其中一个创建失败，一起失败。整合了并发跟数据库回滚和超时。
 //create ten users,if one fail,both fail.(with goroutine,database rollback,time out)
 func CreateUsersHandler(c *gin.Context) {
-	var (
-		params map[string]interface{}
-	)
-
-	if err := c.ShouldBindJSON(&params); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	password := params["password"].(string)
-
+	password := "123456"
 	ch := make(chan string, 2) //get error message
 	finish := make(chan int)   // get finish signal
 	var wg sync.WaitGroup
@@ -122,7 +113,7 @@ func CreateUsersHandler(c *gin.Context) {
 				ch <- err.Error()
 				return
 			}
-			user1 := &models.User{Email: RandStringRunes(6, LetterRunes) + params["email"].(string),
+			user1 := &models.User{Email: RandStringRunes(6, LetterRunes) + "te@te.com",
 				EncryptedPassword: string(bcryptedPassword)}
 			err = tx.Create(user1).Error
 			if err != nil {
@@ -145,40 +136,44 @@ func CreateUsersHandler(c *gin.Context) {
 	Select(c, tx, ch, finish, resp)
 }
 
-func CreateUsersHandlerWithContext(c *gin.Context) {
+// with bug fixing
+func createUsers(ctx context.Context, wg *sync.WaitGroup) error {
 	password := "123456"
+	defer wg.Done()
+	for {
+		select {
+		default:
+			fmt.Println(345)
+			bcryptedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+			if err != nil {
+				fmt.Println("err")
+				return err
+			}
+			user1 := &models.User{
+				Email:             RandStringRunes(6, LetterRunes) + "te@te.com",
+				EncryptedPassword: string(bcryptedPassword),
+			}
+			err = db.DB.Create(user1).Error
+			if err != nil {
+				fmt.Println("err")
+				return err
+			}
+		case <-ctx.Done():
+			return ctx.Err()
+		}
+	}
+}
+
+func CreateUsersHandlerWithContext(c *gin.Context) {
 	var wg sync.WaitGroup
-	tx := db.DB.Begin()
-	wg.Add(10)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 
+	wg.Add(10)
 	for i := 0; i < 10; i++ {
-		go func() {
-			for {
-				defer wg.Done()
-				select {
-				default:
-					bcryptedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-					if err != nil {
-						return
-					}
-					user1 := &models.User{
-						Email:             RandStringRunes(6, LetterRunes) + "te@te.com",
-						EncryptedPassword: string(bcryptedPassword),
-					}
-					err = tx.Create(user1).Error
-					if err != nil {
-						return
-					}
-				case <-ctx.Done():
-					return
-				}
-			}
-
-		}()
+		go createUsers(ctx, &wg)
 	}
+
 	cancel()
 	wg.Wait()
-	tx.Commit()
 	c.String(http.StatusOK, "success")
 }
