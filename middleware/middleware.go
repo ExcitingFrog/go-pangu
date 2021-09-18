@@ -1,10 +1,13 @@
 package middleware
 
 import (
+	"context"
 	"go-pangu/controller"
+	"go-pangu/db"
 	"go-pangu/jwt"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,5 +30,14 @@ func Auth(scp string) gin.HandlerFunc {
 			c.Set("scp", scope)
 			c.Next()
 		}
+	}
+}
+
+func DBMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		tmieOutContext, _ := context.WithTimeout(context.Background(), time.Second)
+		ctx := context.WithValue(c.Request.Context(), "DB", db.DB.WithContext(tmieOutContext))
+		c.Request.WithContext(ctx)
+		c.Next()
 	}
 }

@@ -56,6 +56,7 @@ func SetupRouter() *gin.Engine {
 		authorized.GET("/auth_ping", service.AuthPingHandler)
 	}
 	users := router.Group("/users")
+	users.Use(middleware.DBMiddleware())
 	{
 		users.POST("/sign_up", service.SignUpHandler)
 		users.POST("/sign_in", service.SignInHandler)

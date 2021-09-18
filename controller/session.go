@@ -13,6 +13,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 func SignUpHandler(c *gin.Context) {
@@ -55,6 +56,8 @@ func SignUpHandler(c *gin.Context) {
 }
 
 func SignInHandler(c *gin.Context) {
+	ctx := c.Request.Context()
+	db.DB = ctx.Value("DB").(*gorm.DB)
 	var params map[string]string
 	if err := c.ShouldBindJSON(&params); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
