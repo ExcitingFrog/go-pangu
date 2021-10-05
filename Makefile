@@ -22,6 +22,9 @@ debug:
 release:
 	$(GOBUILD) -tags release -o $(GODIST)/$(PROJECTNAME)-$(GOARCH)-release-linux
 
+build:
+	docker build -t go-pangu .
+
 go-get:
 	@echo "  >  Checking if there is any missing dependencies..."
 	@GOPATH=$(GOPATH) GODIST=$(GODIST) go get $(get)
