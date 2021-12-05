@@ -1,0 +1,1 @@
+create table user_schema(username int);

@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"go-pangu/conf"
+	"go-pangu/db/migration"
 	"net/url"
 
 	"gorm.io/driver/postgres"
@@ -27,6 +28,16 @@ func Open(env string) {
 	if DB, err = gorm.Open(postgres.Open(url), &gorm.Config{}); err != nil {
 		panic(err.Error())
 	}
+
+	var version int
+	verStruct := &migration.VersionStruct{}
+	DB.Table("schema_migrations").Find(&verStruct)
+	if verStruct == nil {
+		version = 0
+	} else {
+		version = verStruct.Version
+	}
+	migration.Migrate(version)
 }
 
 //创建数据库
