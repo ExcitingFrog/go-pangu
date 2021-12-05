@@ -20,8 +20,10 @@ require (
 	github.com/lib/pq v1.10.0
 	github.com/onsi/ginkgo v1.12.1
 	github.com/onsi/gomega v1.10.3
+	github.com/opentracing/opentracing-go v1.1.1-0.20190913142402-a7454ce5950e
 	github.com/qinxin0720/QcloudSms-go v1.0.0
 	github.com/spf13/viper v1.7.1
+	github.com/uber/jaeger-client-go v2.29.1+incompatible
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871
 	gorm.io/driver/postgres v1.0.8
 	gorm.io/gorm v1.21.4
@@ -68,6 +70,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
+	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	go.opentelemetry.io/otel v0.7.0 // indirect
 	go.uber.org/atomic v1.6.0 // indirect

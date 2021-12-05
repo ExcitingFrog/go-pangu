@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/gogf/gf/i18n/gi18n"
+	"github.com/opentracing/opentracing-go"
 )
 
 var cities = []string{
@@ -26,6 +27,8 @@ func wsTest() {
 
 func PingHandler(c *gin.Context) {
 	//ping接口，测试连通性
+	span, _ := opentracing.StartSpanFromContext(c, "Foo")
+	defer span.Finish()
 	wsTest()
 	c.String(http.StatusOK, "pong")
 }
