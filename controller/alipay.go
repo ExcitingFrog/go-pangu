@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iGoogle-ink/gopay"
-	"github.com/iGoogle-ink/gopay/alipay"
+	"github.com/go-pay/gopay"
+	"github.com/go-pay/gopay/alipay"
 )
 
 func AliPayHandler(c *gin.Context) {
@@ -14,7 +14,7 @@ func AliPayHandler(c *gin.Context) {
 	appId := conf.GetEnv("ALIPAY_APP_ID")           //appid
 
 	//启动client
-	client := alipay.NewClient(appId, privateKey, true)
+	client, _ := alipay.NewClient(appId, privateKey, true)
 
 	// 打开Debug开关，输出日志，默认关闭
 	client.DebugSwitch = gopay.DebugOn
@@ -36,7 +36,7 @@ func AliPayHandler(c *gin.Context) {
 	bm.Set("product_code", "QUICK_WAP_WAY")                  //销售产品码，商家和支付宝签约的产品码
 
 	//发送请求，获取返回支付的url，打开就可以支付
-	payURL, err := client.TradePagePay(bm)
+	payURL, err := client.TradePagePay(c, bm)
 	if err != nil {
 		StatusError(c, http.StatusBadRequest, "fail", err.Error())
 		return
