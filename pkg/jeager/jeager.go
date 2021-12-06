@@ -44,7 +44,3 @@ func Jeager() gin.HandlerFunc {
 		opentracing.ContextWithSpan(c, sp)
 	}
 }
-
-func initJaeger(s string) {
-	panic("unimplemented")
-}

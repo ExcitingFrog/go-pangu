@@ -27,7 +27,7 @@ func wsTest() {
 
 func PingHandler(c *gin.Context) {
 	//ping接口，测试连通性
-	span, _ := opentracing.StartSpanFromContext(c, "Foo")
+	span, _ := opentracing.StartSpanFromContext(c, "ping")
 	defer span.Finish()
 	wsTest()
 	c.String(http.StatusOK, "pong")
