@@ -1,4 +1,4 @@
-This project has stopped updated, new restful micro service framwork can refer to [wuanwu service](git remote add origin git@github.com:ExcitingFrog/xuanwu.git)
+This project has stopped updated, new restful micro service framwork can refer to [[xuanwu service] https://github.com/ExcitingFrog/xuanwu](https://github.com/ExcitingFrog/xuanwu)
 
 # Golang-pangu
 [中文文档](https://github.com/ExcitingFrog/go-pangu/blob/master/READMECN.md)
